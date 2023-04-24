@@ -1,16 +1,16 @@
 $(document).ready(function() {
 
-    var $currentDay = $("#currentDay");
-    var $container = $(".container");
-    var timeBlocks = [];
-    var entries = [];
-    var now = moment();
-    var currentHour = now.format("HH");
+    let $currentDay = $("#currentDay");
+    let $container = $(".container");
+    let timeBlocks = [];
+    let entries = [];
+    let now = dayjs();
+    let currentHour = now.format("HH");
   
     timeDate();
     // Display time and date
     function timeDate() {
-      $currentDay.text(now.format("hh:mm a  dddd DD/MM/YYYY"));
+      $currentDay.text(now.format("DD/MM/YYYY"));
   
       hourBlocks();
       setColor();
@@ -19,8 +19,8 @@ $(document).ready(function() {
     // Create hour blocks
     function hourBlocks() {
   
-      for (var i = 9; i < 18; i++) {
-        var row = $("<div>");
+      for (let i = 9; i < 18; i++) {
+        let row = $("<div>");
         row.addClass("row time-block")
         
         if (i < 10) {
@@ -29,9 +29,9 @@ $(document).ready(function() {
           row.attr("data-hour", i);
         }
   
-        var leftCol = $("<div>");
+        let leftCol = $("<div>");
         leftCol.addClass("col-1 d-flex justify-content-end align-items-start hour");
-        var leftParagraph = $("<p>");
+        let leftParagraph = $("<p>");
         leftParagraph.addClass("mt-3 text-right");
         // Time comparision for AM and PM
         if (i < 12) {
@@ -44,7 +44,7 @@ $(document).ready(function() {
   
         leftCol.append(leftParagraph);
   
-        var centerCol = $("<div>");
+        let centerCol = $("<div>");
         centerCol.addClass("col-10 d-flex p-0 description");
         var textarea = $("<textarea>");
         textarea.addClass("w-100 user-input");
@@ -89,10 +89,10 @@ $(document).ready(function() {
       }
   
       $.each(timeBlocks, function(index, block) {
-        var currentId = block.attr("data-hour");
-        var inputField = block.find(".user-input");
+        let currentId = block.attr("data-hour");
+        let inputField = block.find(".user-input");
   
-        for (var i = 0; i < entries.length; i++) {
+        for (let i = 0; i < entries.length; i++) {
           if (entries[i].id === currentId) {
             inputField.val(entries[i].input);
           }
@@ -102,8 +102,8 @@ $(document).ready(function() {
   
     // Format Entry
     function formatEntry() {
-      var block = $(this).parent();
-      var input = block.find(".user-input").val();
+      let block = $(this).parent();
+      let input = block.find(".user-input").val();
   
       entry = {
         id: block.attr("data-hour"),
